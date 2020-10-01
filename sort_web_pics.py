@@ -12,7 +12,7 @@ def find_ten_days_prior():
 
 
 def start():
-    base_dir = os.path.join('home', 'webcam')
+    base_dir = os.path.join('home', 'pi', 'webcam')
     os.chdir(base_dir)
     today = find_today()
     # ten_days_prior = find_ten_days_prior()
