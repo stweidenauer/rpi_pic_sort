@@ -1,10 +1,10 @@
 import os
+import shutil
 from datetime import datetime
 
 
 def find_today():
-    today = datetime.today()
-    pass
+    return datetime.now().strftime("%Y-%m-%d")
 
 
 def find_ten_days_prior():
@@ -12,12 +12,14 @@ def find_ten_days_prior():
 
 
 def start():
+    base_dir = os.path.join('home', 'webcam')
+    os.chdir(base_dir)
     today = find_today()
-    ten_days_prior = find_ten_days_prior()
-    path_to_pictures = os.join.path('webcam')
-    for file in os.listdir(path_to_pictures):
-        if file.startswith(today):
-            os.mkdir()
+    # ten_days_prior = find_ten_days_prior()
+    os.mkdirs(today)
+    for picture in os.listdir():
+        if picture.startswith(today):
+            shutil.move(picture, today)
 
     pass
 
