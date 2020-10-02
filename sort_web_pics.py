@@ -17,20 +17,25 @@ def find_ten_days_prior():
 
 
 def start():
-    # define base_dir and change to
+    # define base_dir and target directory
     base_dir = os.path.join('/', 'home', 'pi', 'webcam')
-    os.chdir(base_dir)
+    target_dir = os.path.join('/', 'home', 'pi', 'flask_app', 'app', 'static')
 
     # finds today and 10 days prior in a formated type
     today = find_today()
     ten_days_prior = find_ten_days_prior()
 
-    # copies pictures of today in an folder with the same name
+    # create target folder
+    os.chdir(target_dir)
     if not os.path.isdir('./' + today):
         os.mkdir(today)
+
+    # copies pictures of today in an folder with the same name
+
+    os.chdir(base_dir)
     for picture in os.listdir():
         if picture.startswith(today):
-            shutil.move(picture, today)
+            shutil.move(picture, os.path.join(target_dir, today))
 
     # removes folders that is 10 days old
     for folder in os.listdir():
@@ -40,3 +45,4 @@ def start():
 
 if __name__ == "__main__":
     start()
+
