@@ -11,9 +11,16 @@ def find_today():
 
 
 # returns ten days prior string formatted: YYYY-MM-DD
-def find_ten_days_prior():
-    ten_days = timedelta(days=10)
-    return (datetime.today() - ten_days).strftime("%Y-%m-%d")
+def find_last_ten_days():
+    day_list = []
+    today = datetime.now()
+    for i in range(10):
+        day_list.append((today - timedelta(days=i)).strftime("%Y-%m-%d"))
+    return day_list
+
+
+def ten_days_prior():
+    return (datetime.now()-timedelta(days=10)).strftime("%Y-%m-%d")
 
 
 def start():
@@ -21,28 +28,21 @@ def start():
     base_dir = os.path.join('/', 'home', 'pi', 'webcam')
     target_dir = os.path.join('/', 'home', 'pi', 'flask_app', 'app', 'static')
 
-    # finds today and 10 days prior in a formated type
-    today = find_today()
-    ten_days_prior = find_ten_days_prior()
-
     # create target folder
     os.chdir(target_dir)
-    if not os.path.isdir('./' + today):
-        os.mkdir(today)
-
-    # copies pictures of today in an folder with the same name
-
-    os.chdir(base_dir)
-    for picture in os.listdir():
-        if picture.startswith(today):
-            shutil.move(picture, os.path.join(target_dir, today))
+    for item in find_last_ten_days():
+        if not os.path.isdir('./' + item):
+            os.mkdir(item)
+        os.chdir(base_dir)
+        for picture in os.listdir():
+            if picture.startswith(item):
+                shutil.move(picture, os.path.join(target_dir, item))
 
     # removes folders that is 10 days old
     for folder in os.listdir():
-        if folder.startswith(ten_days_prior) and os.path.isdir(folder):
+        if folder.startswith(ten_days_prior()) and os.path.isdir(folder):
             shutil.rmtree(folder)
 
 
 if __name__ == "__main__":
     start()
-
