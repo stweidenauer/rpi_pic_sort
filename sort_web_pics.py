@@ -48,7 +48,7 @@ def start():
         if folder.startswith('2020-10-03') and os.path.isdir(folder):
             shutil.rmtree(folder)
             print('Folder gefunden und gelösch')
-            
+
 
 if __name__ == "__main__":
     start()
