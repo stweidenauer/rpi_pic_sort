@@ -25,10 +25,10 @@ def ten_days_prior():
 
 def start():
     # define base_dir and target directory
-    base_dir = os.path.join('/', 'home', 'steffen', 'GitHub', 'rpi_pic_sort')
-    target_dir = os.path.join('/', 'home', 'steffen', 'GitHub', 'rpi_pic_sort', 'test')
+    base_dir = os.path.join('/', 'home', 'pi', 'webcam')
+    target_dir = os.path.join('/', 'home', 'pi', 'flask_app', 'app', 'static')
 
-    # create target folder
+    # create target folders
     list_last_five_days = find_last_five_days()
     for item in list_last_five_days:
         os.chdir(target_dir)
@@ -37,6 +37,7 @@ def start():
             print('Directory ' + item + 'created')
         new_target_dir = os.path.join(target_dir, item)
         os.chdir(base_dir)
+        # move pictures to new folder
         for picture in os.listdir():
             if picture.startswith(item):
                 shutil.move(picture, new_target_dir)
