@@ -5,11 +5,6 @@ import shutil
 from datetime import datetime, timedelta
 
 
-# returns today string formatted: YYYY-MM-DD
-def find_today():
-    return datetime.now().strftime("%Y-%m-%d")
-
-
 # returns ten days prior string formatted: YYYY-MM-DD
 def find_last_ten_days():
     day_list = []
@@ -38,7 +33,6 @@ def start():
 
     # move pictures to new folder
     os.chdir(base_dir)
-    print(base_dir)
     for item in list_last_ten_days:
         new_target_dir = os.path.join(target_dir, item)
         for picture in os.listdir():
