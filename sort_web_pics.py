@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#!/usr/bin/python3
 
 import os
 import shutil
@@ -14,10 +14,6 @@ def find_last_ten_days():
     return day_list
 
 
-def ten_days_prior():
-    return (datetime.now() - timedelta(days=9)).strftime("%Y-%m-%d")
-
-
 def start():
     # define base_dir and target directory
     base_dir = os.path.join('/', 'home', 'pi', 'webcam')
@@ -29,26 +25,21 @@ def start():
         os.chdir(target_dir)
         if not os.path.isdir('./' + item):
             os.mkdir(item)
-            print('Directory ' + item + 'created')
 
-    # move pictures to new folder
-    os.chdir(base_dir)
-    for item in list_last_ten_days:
+        # move pictures to new folder
+        os.chdir(base_dir)
         new_target_dir = os.path.join(target_dir, item)
         for picture in os.listdir():
             if picture.startswith(item):
                 shutil.move(picture, new_target_dir)
-                print('picture ' + picture + 'moved')
 
-    # removes folder that is 10 days old
+    # removes folder that is older than 10 days
     os.chdir(target_dir)
-    ten_days = ten_days_prior()
     for folder in os.listdir():
         if folder[:10] in list_last_ten_days:
             continue
         elif os.path.isdir(folder):
             shutil.rmtree(folder)
-            print('Folder gefunden und gelöscht')
 
 
 if __name__ == "__main__":
