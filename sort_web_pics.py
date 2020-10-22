@@ -40,11 +40,13 @@ def start():
                 shutil.move(picture, new_target_dir)
                 print('picture ' + picture + 'moved')
 
-    # removes folders that is 10 days old
+    # removes folder that is 10 days old
     os.chdir(target_dir)
     ten_days = ten_days_prior()
     for folder in os.listdir():
-        if folder.startswith(ten_days) and os.path.isdir(folder):
+        if folder[:10] in list_last_ten_days:
+            continue
+        elif os.path.isdir(folder):
             shutil.rmtree(folder)
             print('Folder gefunden und gelöscht')
 
