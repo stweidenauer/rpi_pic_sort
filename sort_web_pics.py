@@ -16,8 +16,10 @@ def find_last_ten_days():
 
 def start():
     # define base_dir and target directory
-    base_dir = os.path.join('/', 'home', 'pi', 'webcam')
-    target_dir = os.path.join('/', 'home', 'pi', 'flask_app', 'app', 'static')
+    # base_dir = os.path.join('/', 'home', 'pi', 'webcam')
+    # target_dir = os.path.join('/', 'home', 'pi', 'flask_app', 'app', 'static')
+    base_dir = os.path.join('/', 'home', 'kali', 'webcam')
+    target_dir = os.path.join('/', 'home', 'kali', 'flask_app', 'app', 'static')
 
     # create target folders
     list_last_ten_days = find_last_ten_days()
